@@ -21,25 +21,45 @@ class IncludeNameMatch(object):
         self.string = str(string)
     
     def disposition(self):
-        return self.DISPOSITION_INCLUDE
+        return DISPOSITION_INCLUDE if 'Include' in self.__class__.__name__ else DISPOSITION_EXCLUDE
     
     def is_match(self, other_string):
         return other_string == self.string
 
 class ExcludeNameMatch(IncludeNameMatch):
 
-    def disposition(self):
-        return self.DISPOSITION_EXCLUDE
+    pass
+
+class IncludeNameMatchCaseless(IncludeNameMatch):
+
+    def is_match(self, other_string):
+        return other_string.lower() == self.string.lower()
+
+class ExcludeNameMatchCaseless(IncludeNameMatchCaseless):
+
+    pass
+
+
 
 class IncludeNameFnMatch(IncludeNameMatch):
 
     def is_match(self, other_string):
-        return fnmatch.fnmatch(other_string, self.string)
+        return fnmatch.fnmatchcase(other_string, self.string)
 
 class ExcludeNameFnMatch(IncludeNameFnMatch):
 
-    def disposition(self):
-        return self.DISPOSITION_EXCLUDE
+    pass
+        
+class IncludeNameFnMatchCaseless(IncludeNameFnMatch):
+
+    def is_match(self, other_string):
+        return fnmatch.fnmatch(other_string, self.string)
+
+class ExcludeNameFnMatchCaseless(IncludeNameFnMatchCaseless):
+
+    pass
+
+
 
 class IncludeNameRegexMatch(IncludeNameMatch):
 
@@ -52,8 +72,22 @@ class IncludeNameRegexMatch(IncludeNameMatch):
 
 class ExcludeNameRegexMatch(IncludeNameRegexMatch):
 
-    def disposition(self):
-        return self.DISPOSITION_EXCLUDE
+    pass
+
+class IncludeNameRegexMatchCaseless(IncludeNameMatch):
+
+    def __init__(self, string):
+        super(IncludeNameRegexMatch, self).__init__(string)
+        self.regex = re.compile(string, re.IGNORECASE)
+    
+    def is_match(self, other_string):
+        return self.regex.search(other_string) is not None
+
+class ExcludeNameRegexMatchCaseless(IncludeNameRegexMatchCaseless):
+
+    pass
+
+
 
 #
 # Setup command line argument parsing:

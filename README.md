@@ -116,7 +116,7 @@ With the gas-phase calculation completed, the workflow can proceed to the next s
 
 The `available-chemicals` script does have far more functionality available:
 
-- CHEMICAL names and name patters can be excluded/included from the list
+- CHEMICAL names and name patterns can be excluded/included from the list
 - The list can be pulled from a text file (one CHEMICAL name per line) rather than by scanning the `../0-chemicals` directory for names
 
 The command has built-in help that describes the available options in detail:
@@ -284,3 +284,36 @@ total 336
 ```
 
 The DiethylEther-solvated job ran properly this time and produced output.
+
+### For the Expert
+
+The `available-chemicals` script for this step also has far more functionality available:
+
+- CHEMICAL names and name patterns can be excluded/included from the list
+- The list can be pulled from a text file (one CHEMICAL name per line) rather than by scanning the `../0-chemicals` directory for names
+
+The command has built-in help that describes the available options in detail:
+
+```
+$ pushd 2-solvated
+$ ./available-chemicals --help
+usage: available-chemicals.py [-h] [--format {csv,lines,json}]
+                              [--base-list {all,none}] [--short-circuit]
+                              [--completed-dir <directory>] [--exclude <name>]
+                              [--exclude-regex <regular-expression>]
+                              [--exclude-pattern <glob-pattern>]
+                              [--include <name>]
+                              [--include-regex <regular-expression>]
+                              [--include-pattern <glob-pattern>]
+                              [--name-list <file>]
+                              [--json-name-list <json-file>]
+                                   :
+```
+
+All of these options can also be passed to the `./templating.sh` script, and it will use them when it invokes `./available-chemicals` to generate the CHEMICAL name list.
+
+Additional detailed discussion of this workflow step can be found in the [2-solvated/README.md](./2-solvated/README.md) file.
+
+## Step 3:  Results
+
+As constructed, the workflow will fill-in the [3-completed](./3-completed) directory with a hierarchy of results.  The results are organized at the top level by CHEMICAL name; inside each CHEMICAL directory are the optimized results for that discrete molecule and any successful solvated calculations.  The solvated results are organized by SOLVENT name, as well.  Thus, the [3-completed](./3-completed) directory winds up holding all deliverable results from the workflow.
