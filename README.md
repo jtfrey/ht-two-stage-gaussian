@@ -2,6 +2,8 @@
 
 This directory contains files that implement a Slurm job array-based workflow for studying large-scale combinations of computational parameters.  In this case, the combinations of a discrete molecule ("chemical") and multiple solvents are to be studied.
 
+The generation of job array hierarchies makes use of the [job-templating-tool](https://github.com/jtfrey/job-templating-tool) utility.
+
 
 ## Configuration
 
