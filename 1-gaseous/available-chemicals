@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Locate all available CHEMICAL species in the 0-chemicals directory of
+# this workflow.  Omit any that the user indicates s/he does not want
+# and emit a comma-delimited list of names.
+#
+
+# This is what we're most interested in, the workflow configuration:
+source ../config.sh
+
+# Execute the Python code:
+exec python available-chemicals.py "$@"
+

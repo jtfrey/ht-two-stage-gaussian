@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# Wrapper for the job_index_lookup.py script.
+#
+
+# This is what we're most interested in, the workflow configuration:
+source "$(realpath --relative-to="$(pwd)" "$(dirname "${BASH_SOURCE[0]}")/../config.sh")"
+
+# Execute the Python code:
+exec python "$(dirname "${BASH_SOURCE[0]}")"/job-index-lookup.py "$@"
+
