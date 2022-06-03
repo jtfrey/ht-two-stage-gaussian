@@ -24,7 +24,7 @@ While the values of `NPROC` and `MEM_PER_PROC` may require modification, the res
 The workflow begins with providing one or more molecular coordinate files for the chemical species to be studied.  Each file must be named with the CHEMICAL name and a `.xyz` suffix:
 
 ```
-$ cd 0-chemicals
+$ pushd 0-chemicals
 
 $ ls -l
 total 1
@@ -35,6 +35,7 @@ $ cat CarbonMonoxide.xyz
 C    0.0    0.0    0.0
 O    0.0    0.0    1.44
 
+$ popd
 ```
 
 In this case, the CHEMICAL name is `CarbonMonoxide` and is the only file present.  Since file names on Unix systems are case-sensitive, CHEMICAL names are also case-sensitive:  `CarbonMonoxide` and `carbonmonoxide` are distinct names.
@@ -119,7 +120,7 @@ The `available-chemicals` script does have far more functionality available:
 The command has built-in help that describes the available options in detail:
 
 ```
-$ cd 1-gaseous
+$ pushd 1-gaseous
 $ ./available-chemicals --help
 usage: available-chemicals.py [-h] [--format {csv,lines,json}]
                               [--base-list {all,none}] [--short-circuit]
