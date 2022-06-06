@@ -32,6 +32,7 @@ total 48
 drwxr-xr-x  3 frey  it_nss     96 Jun  6 09:04 0-chemicals
 drwxr-xr-x  9 frey  it_nss    288 Jun  6 09:04 1-gaseous
 drwxr-xr-x  9 frey  it_nss    288 Jun  6 09:04 2-solvated
+drwxr-xr-x  9 frey  it_nss     96 Jun  6 09:04 3-completed
 -rw-r--r--  1 frey  it_nss   1355 Jun  6 09:04 LICENSE
 -rw-r--r--  1 frey  it_nss  14076 Jun  6 09:04 README.md
 -rw-r--r--  1 frey  it_nss    940 Jun  6 09:04 config.sh
