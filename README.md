@@ -9,6 +9,8 @@ The generation of job array hierarchies makes use of the [job-templating-tool](h
 
 The workflow described herein is made available as a git revision-controlled repository with its origin in the Github cloud.  For each project on which you wish to work, it is recommended that you create a new copy of this directory hierarchy on Caviness or DARWIN.
 
+> **NOTE**:  Before proceeding, be sure you have entered your desired cluster workgroup using the `workgroup` command.
+
 First, choose a name for the directory, likely related to the project in question:  for the sake of example, let's say `STL-2`.  I want to store this project in `${WORKDIR}/users/frey/solvation/STL-2`.  The initial directory hierarchy is pulled from Github to populate that directory using the `git` command:
 
 ```
