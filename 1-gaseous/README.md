@@ -93,7 +93,7 @@ Whether or not the job produced usable results is then checked.  This is accompl
 
 > PLEASE NOTE:  additional on-the-fly tests of the Gaussian output can be added to the `check_gaussian_output()` function by the user but will only be applied in job arrays generated thereafter.
 
-If all tests are passed, the script copies the `.com`, `.log`, and `.chk` files into the workflow's [../3-completed](../3-completed) directory (where solvated job arrays can find gas-phase results).  The copying is effected using the Unix `install` command so that any existing output files in the [../3-completed](../3-completed) directory are renamed rather than being overwritten.
+If all tests are passed, the script copies the `.com`, `.log`, and `.chk` files into the workflow's [../3-completed/<CHEMICAL>](../3-completed/<CHEMICAL>) directory (where solvated job arrays can find gas-phase results).  The copying is effected using the Unix `install` command so that any existing output files in the [../3-completed/<CHEMICAL>](../3-completed/<CHEMICAL>) directory are renamed rather than being overwritten.
 
 
 
@@ -117,13 +117,13 @@ Submitted batch job 13753296
 The job array appears in `squeue` output as a base job id, an underscore, and a job index, e.g. `13742533_1`:
 
 ```
-$ squeue --user=frey
+$ squeue --job=13753296
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
       13753296_[1]  standard gas_phas     frey PD       0:00      1 (None)
 
  ...wait a minute...
 
-$ squeue --user=frey
+$ squeue --job=13753296
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
         13753296_1  standard gas_phas     frey  R       0:05      1 r01n42
 ```

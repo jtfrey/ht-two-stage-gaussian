@@ -5,6 +5,39 @@ This directory contains files that implement a Slurm job array-based workflow fo
 The generation of job array hierarchies makes use of the [job-templating-tool](https://github.com/jtfrey/job-templating-tool) utility.
 
 
+## Getting Started
+
+The workflow described herein is made available as a git revision-controlled repository with its origin in the Github cloud.  For each project on which you wish to work, it is recommended that you create a new copy of this directory hierarchy on Caviness or DARWIN.
+
+First, choose a name for the directory, likely related to the project in question:  for the sake of example, let's say `STL-2`.  I want to store this project in `${WORKDIR}/users/frey/solvation/STL-2`.  The initial directory hierarchy is pulled from Github to populate that directory using the `git` command:
+
+```
+$ git clone https://github.com/jtfrey/ht-two-stage-gaussian.git ${WORKDIR}/users/frey/solvation/STL-2
+Cloning into '/work/it_nss/users/frey/solvation/STL-2'...
+remote: Enumerating objects: 37, done.
+remote: Counting objects: 100% (37/37), done.
+remote: Compressing objects: 100% (25/25), done.
+remote: Total 37 (delta 12), reused 33 (delta 10), pack-reused 0
+Receiving objects: 100% (37/37), 21.38 KiB | 3.05 MiB/s, done.
+Resolving deltas: 100% (12/12), done.
+```
+
+The structure of the directory can easily be confirmed:
+
+```
+$ cd ${WORKDIR}/users/frey/solvation/STL-2
+
+$ ls -l
+total 48
+drwxr-xr-x  3 frey  it_nss     96 Jun  6 09:04 0-chemicals
+drwxr-xr-x  9 frey  it_nss    288 Jun  6 09:04 1-gaseous
+drwxr-xr-x  9 frey  it_nss    288 Jun  6 09:04 2-solvated
+-rw-r--r--  1 frey  it_nss   1355 Jun  6 09:04 LICENSE
+-rw-r--r--  1 frey  it_nss  14076 Jun  6 09:04 README.md
+-rw-r--r--  1 frey  it_nss    940 Jun  6 09:04 config.sh
+```
+
+
 ## Configuration
 
 The workflow uses the [config.sh](./config.sh) file to provide global defintions of some critical parameters:
@@ -84,13 +117,13 @@ $ pushd ./jobs-20220603-1604
 $ sbatch job_array.qs
 Submitted batch job 13758353
 
-$ squeue --user=$(id -u)
+$ squeue --job=13758353
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
       13758353_[1]  standard gas_phas     frey PD       0:00      1 (None)
       
  … wait a few seconds …  
     
-$ squeue --user=$(id -u)
+$ squeue --job=13758353
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
         13758353_1  standard gas_phas     frey  R       0:04      1 r01n22
 ```
@@ -182,13 +215,13 @@ $ pushd ./jobs-20220603-1617
 $ sbatch job_array.qs
 Submitted batch job 13758374
 
-$ squeue --user=$(id -u)
+$ squeue --job=13758374
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
     13758374_[1-2]  standard solvated     frey PD       0:00      1 (None)
       
  … wait a few seconds …  
     
-$ squeue --user=$(id -u)
+$ squeue --job=13758374
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
         13758374_1  standard solvated     frey  R       0:01      1 r03n18
         13758374_2  standard solvated     frey  R       0:01      1 r03n19
