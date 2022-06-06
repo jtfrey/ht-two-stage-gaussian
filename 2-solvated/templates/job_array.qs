@@ -14,7 +14,7 @@
 #SBATCH --output=./output/slurm-%A_%a.out
 #SBATCH --time=2-00:00:00
 #SBATCH --export=NONE
-#SBATCH --partition=standard
+#SBATCH --partition=_workgroup_
 ##
 ## The array indices will go from one (1) to the highest
 ## produced by the templating:
