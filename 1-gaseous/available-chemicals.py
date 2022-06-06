@@ -21,15 +21,14 @@ class IncludeNameMatch(object):
         self.string = str(string)
     
     def disposition(self):
-        return self.DISPOSITION_INCLUDE
+        return self.DISPOSITION_INCLUDE if 'Include' in self.__class__.__name__ else self.DISPOSITION_EXCLUDE
     
     def is_match(self, other_string):
         return other_string == self.string
 
 class ExcludeNameMatch(IncludeNameMatch):
 
-    def disposition(self):
-        return self.DISPOSITION_EXCLUDE
+    pass
 
 class IncludeNameFnMatch(IncludeNameMatch):
 
@@ -38,8 +37,7 @@ class IncludeNameFnMatch(IncludeNameMatch):
 
 class ExcludeNameFnMatch(IncludeNameFnMatch):
 
-    def disposition(self):
-        return self.DISPOSITION_EXCLUDE
+    pass
 
 class IncludeNameRegexMatch(IncludeNameMatch):
 
@@ -52,8 +50,7 @@ class IncludeNameRegexMatch(IncludeNameMatch):
 
 class ExcludeNameRegexMatch(IncludeNameRegexMatch):
 
-    def disposition(self):
-        return self.DISPOSITION_EXCLUDE
+    pass
 
 #
 # Setup command line argument parsing:
